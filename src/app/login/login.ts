@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ export class Login {
   loginForm: FormGroup;
   hidePassword = true;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -44,6 +45,7 @@ export class Login {
     this.loginService.login(formData).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.message);
+        this.router.navigate(['/search']);
       },
       error: (error) => {
         console.log(error);
