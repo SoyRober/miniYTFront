@@ -1,0 +1,23 @@
+<h2 mat-dialog-title class="self-center">Upload your video!</h2>
+
+<mat-dialog-content class="h-40 flex content-center self-center">
+  <div class="flex items-center justify-center">
+    <label
+      for="file-upload"
+      class="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow"
+    >
+      Select your file
+    </label>
+    <input
+      id="file-upload"
+      type="file"
+      class="hidden"
+      (change)="onFileSelected($event)"
+    />
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [disabled]="!selectedFile" (click)="onUpload()">Upload</button>
+</mat-dialog-actions>

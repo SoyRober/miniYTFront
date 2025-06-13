@@ -17,6 +17,8 @@
       routerLinkActive="active"
       >Register</a
     >
+    } @else {
+      <button matButton (click)="openUploadDialog()">Upload Video</button>
     }
   </div>
 </mat-toolbar>
