@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SearchService } from './search.service';
 import {NgOptimizedImage} from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -15,7 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 export class Search {
   videos: any;
 
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService, private router: Router) { }
 
   ngOnInit() {
     this.searchService.searchVideos().subscribe({
@@ -27,5 +28,9 @@ export class Search {
         console.log(err);
       }
     });
+  }
+
+  redirectToVideo(videoPath: string) {
+    this.router.navigate([`/view/${videoPath}`]);
   }
 }
