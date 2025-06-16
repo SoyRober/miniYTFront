@@ -1,23 +1,78 @@
-<h2 mat-dialog-title class="self-center">Upload your video!</h2>
+<h2 mat-dialog-title class="text-2xl font-bold text-center text-gray-800">
+  Upload your video!
+</h2>
 
-<mat-dialog-content class="h-40 flex content-center self-center">
-  <div class="flex items-center justify-center">
-    <label
-      for="file-upload"
-      class="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow"
-    >
-      Select your file
-    </label>
-    <input
-      id="file-upload"
-      type="file"
-      class="hidden"
-      (change)="onFileSelected($event)"
-    />
-  </div>
+<mat-dialog-content class="h-60 flex flex-col justify-center items-center space-y-6 px-4">
+  @if (!selectedFile) {
+    <div class="flex flex-col items-center">
+      <label
+        for="file-upload"
+        class="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300"
+      >
+        Select your file
+      </label>
+      <input
+        id="file-upload"
+        formControlName="file"
+        type="file"
+        class="hidden"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+  } @else {
+    <form [formGroup]="videoForm" class="w-full max-w-md space-y-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="title"
+          placeholder="Enter video title"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          placeholder="Enter video description"
+          rows="4"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Thumbnail (opcional)</mat-label>
+        <div class="flex items-center space-x-4">
+          <label
+            for="thumbnail-upload"
+            class="cursor-pointer bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-300"
+          >
+            Select a thumbnail
+          </label>
+          <input
+            id="thumbnail-upload"
+            type="file"
+            class="hidden"
+            formControlName="thumbnail"
+            (change)="onThumbnailSelected($event)"
+            accept="image/*"
+          />
+        </div>
+      </mat-form-field>
+    </form>
+  }
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [disabled]="!selectedFile" (click)="onUpload()">Upload</button>
+<mat-dialog-actions align="end" class="px-4 py-2">
+  <button mat-stroked-button color="warn" mat-dialog-close>
+    Cancel
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!selectedFile"
+    (click)="onUpload()"
+  >
+    Upload
+  </button>
 </mat-dialog-actions>
