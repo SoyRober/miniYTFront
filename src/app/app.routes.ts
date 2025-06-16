@@ -9,5 +9,5 @@ export const routes: Routes = [
   {path: "login", component: Login},
   {path: "register", component: Register},
   {path: "search", component: Search},
-  {path: 'view/upload/videos/:videopath', component: VideoView}
+  {path: 'view/:videoUuid', component: VideoView}
 ];

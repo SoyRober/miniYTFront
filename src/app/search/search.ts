@@ -30,7 +30,8 @@ export class Search {
     });
   }
 
-  redirectToVideo(videoPath: string) {
-    this.router.navigate([`/view/${videoPath}`]);
+  redirectToVideo(videoUuid: string) {
+    console.log(videoUuid);
+    this.router.navigate([`/view/${videoUuid}`]);
   }
 }

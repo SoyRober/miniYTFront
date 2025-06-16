@@ -13,7 +13,7 @@ export class VideoView {
   constructor(private router: ActivatedRoute) {}
 
   ngOnInit() {
-    const param = this.router.snapshot.paramMap.get('videopath');
+    const param = this.router.snapshot.paramMap.get('videoUuid');
     if (param) {
       console.log(param);
       this.videoPath = `http://localhost:8080/public/video/stream/${param}`;
