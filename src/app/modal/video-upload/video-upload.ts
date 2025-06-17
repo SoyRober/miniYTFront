@@ -20,40 +20,22 @@ export class VideoUpload {
     this.videoForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(0)]],
-      file: [null, Validators.required],
-      thumbnail: [null, Validators.required]
+      thumbnail: [null],
+      file: [null, Validators.required]
     })
   }
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
-
     if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-      console.log(this.selectedFile);
+      const file = input.files[0];
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.videoForm.patchValue({ file: reader.result as string });
+      };
+      reader.readAsDataURL(file);
     }
-  }
-
-
-  onUpload() {
-    if (this.videoForm.invalid || !this.selectedFile) {
-      console.log("Form is invalid or no file selected");
-      return;
-    }
-
-    this.videoForm.value.file = this.selectedFile;
-    this.videoForm.value.thumbnail = this.selectedThumbnail;
-
-    const formData = this.videoForm.value;
-
-    this.videoService.uploadVideo(formData).subscribe({
-      next: () => {
-        console.log(this.selectedFile);
-      },
-      error: err => {
-        console.log(err);
-      }
-    })
   }
 
   onThumbnailSelected(event: Event) {
@@ -61,7 +43,6 @@ export class VideoUpload {
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       const reader = new FileReader();
-
       reader.onload = (e: any) => {
         const img = new Image();
         img.onload = () => {
@@ -73,8 +54,9 @@ export class VideoUpload {
             ctx.drawImage(img, 0, 0, 1280, 720);
             canvas.toBlob(blob => {
               if (blob) {
-                this.selectedThumbnail =
-                  new File([blob], file.name.replace(/\.[^/.]+$/, ".webp"), { type: 'image/webp' });
+                const webpFile = new File([blob], file.name.replace(/\.[^/.]+$/, ".webp"),
+                  { type: 'image/webp' });
+                this.selectedThumbnail = webpFile;
               }
             }, 'image/webp', 0.8);
           }
@@ -83,5 +65,34 @@ export class VideoUpload {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  onUpload() {
+    if (this.videoForm.invalid || !this.selectedFile) {
+      console.log("Form is invalid or no file selected");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    const data = {
+      title: this.videoForm.value.title,
+      description: this.videoForm.value.description
+    };
+    formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+
+    if (this.selectedThumbnail) {
+      formData.append('thumbnail', this.selectedThumbnail);
+    }
+
+    this.videoService.uploadVideo(formData).subscribe({
+      next: () => {
+        console.log(this.selectedFile);
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 }

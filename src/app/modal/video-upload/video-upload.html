@@ -3,24 +3,24 @@
 </h2>
 
 <mat-dialog-content class="h-60 flex flex-col justify-center items-center space-y-6 px-4">
-  @if (!selectedFile) {
-    <div class="flex flex-col items-center">
-      <label
-        for="file-upload"
-        class="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300"
-      >
-        Select your file
-      </label>
-      <input
-        id="file-upload"
-        formControlName="file"
-        type="file"
-        class="hidden"
-        (change)="onFileSelected($event)"
-      />
-    </div>
+  <form [formGroup]="videoForm" class="w-full max-w-md space-y-4">
+    @if (!selectedFile) {
+      <div class="flex flex-col items-center">
+        <label
+          for="file-upload"
+          class="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300"
+        >
+          Select your file
+        </label>
+        <input
+          id="file-upload"
+          formControlName="file"
+          type="file"
+          class="hidden"
+          (change)="onFileSelected($event)"
+        />
+      </div>
   } @else {
-    <form [formGroup]="videoForm" class="w-full max-w-md space-y-4">
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Title</mat-label>
         <input
@@ -40,8 +40,6 @@
           rows="4"
         ></textarea>
       </mat-form-field>
-      <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Thumbnail (opcional)</mat-label>
         <div class="flex items-center space-x-4">
           <label
             for="thumbnail-upload"
@@ -58,9 +56,9 @@
             accept="image/*"
           />
         </div>
-      </mat-form-field>
-    </form>
   }
+  </form>
+
 </mat-dialog-content>
 
 <mat-dialog-actions align="end" class="px-4 py-2">
