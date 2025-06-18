@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { VideoViewService } from './video-view.service';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 export interface VideoDetails {
   uuid: string;
@@ -10,13 +11,13 @@ export interface VideoDetails {
 
 @Component({
   selector: 'app-video-view',
-  imports: [],
+  imports: [MatExpansionModule],
   templateUrl: './video-view.html',
   styleUrl: './video-view.css'
 })
 export class VideoView {
   videoPath?: string;
-  videoDetails?: any;
+  videoDetails?: VideoDetails;
   uuid?: string | null;
 
   constructor(private router: ActivatedRoute, private videoViewService: VideoViewService) {}
