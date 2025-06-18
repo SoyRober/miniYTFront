@@ -3,6 +3,7 @@ import { SearchService } from './search.service';
 import {NgOptimizedImage} from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import {Router} from '@angular/router';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search',
@@ -16,7 +17,7 @@ import {Router} from '@angular/router';
 export class Search {
   videos: any;
 
-  constructor(private searchService: SearchService, private router: Router) { }
+  constructor(private searchService: SearchService, private router: Router, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.searchService.searchVideos().subscribe({
@@ -34,4 +35,9 @@ export class Search {
     console.log(videoUuid);
     this.router.navigate([`/view/${videoUuid}`]);
   }
+
+  getThumbnailSrc(thumbnail: string): SafeUrl {
+      return this.sanitizer.bypassSecurityTrustUrl('data:image/webp;base64,' + thumbnail);
+  }
+
 }

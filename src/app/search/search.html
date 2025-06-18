@@ -1,13 +1,17 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
   @for (video of videos; track video.id) {
     <mat-card class="rounded-xl drop-shadow-sm cursor-pointer" (click)="redirectToVideo(video.uuid)">
+      <div class="truncate">
+
+        {{video.thumbnail}}
+      </div>
       @if (video.thumbnail) {
         <img
           mat-card-image
-          [ngSrc]="video.thumbnail"
+          [src]="getThumbnailSrc(video.thumbnail)"
           [alt]="video.title"
           class="object-cover h-48 w-full"
-          fill/>
+        />
       } @else {
         <div class="h-48 flex items-center justify-center bg-gray-100 text-gray-500">
           No thumbnail available
