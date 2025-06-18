@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
   @for (video of videos; track video.uuid) {
     <mat-card class="rounded-xl drop-shadow-sm cursor-pointer" (click)="redirectToVideo(video.uuid)">
       @if (video.thumbnail) {
@@ -6,10 +6,10 @@
           mat-card-image
           [src]="getThumbnailSrc(video.thumbnail)"
           [alt]="video.title"
-          class="object-cover h-48 w-full p-1"
+          class="object-cover h-48 w-full p-1 rounded-xl"
         />
       } @else {
-        <div class="h-48 flex items-center justify-center bg-gray-100 text-gray-500">
+        <div class="h-48 flex items-center justify-center bg-gray-100 text-gray-500 rounded-xl">
           No thumbnail available
         </div>
       }
