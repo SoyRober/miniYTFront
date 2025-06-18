@@ -1,9 +1,12 @@
-<video width="640" height="360" controls>
-  @if (videoPath) {
-    <p>Reproduciendo video: {{ videoPath }}</p>
-    <source [src]="videoPath" type="video/mp4">
-  } @else {
-
-    <p>Tu navegador no soporta la reproducción de video.</p>
-  }
-</video>
+<div class="video-container">
+  <video width="640" height="360" controls>
+    @if (videoPath) {
+      <p>Reproducing video: {{ videoPath }}</p>
+      <source [src]="videoPath" type="video/mp4">
+    } @else {
+      <p>Your browser does not support video playback.</p>
+    }
+  </video>
+  <h2 class="video-title">{{videoDetails?.title}}</h2>
+  <p class="video-description">{{videoDetails?.description}}</p>
+</div>
