@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import {ToastService} from '../toast/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,7 @@ export class Login {
   loginForm: FormGroup;
   hidePassword = true;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router, private toastService: ToastService) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -44,6 +45,7 @@ export class Login {
 
     this.loginService.login(formData).subscribe({
       next: (response) => {
+        this.toastService.show("Login successful!", 'success', 3000);
         localStorage.setItem('token', response.message);
         this.router.navigate(['/search']);
       },

@@ -5,6 +5,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {VideoUpload} from './modal/video-upload/video-upload';
 import {Router} from '@angular/router';
+import {Toast} from './toast/toast';
+import {ToastService} from './toast/toast.service';
+
 @Component({
   selector: 'app-root',
   imports: [
@@ -14,6 +17,7 @@ import {Router} from '@angular/router';
     RouterLink,
     RouterLinkActive,
     MatDialogModule,
+    Toast,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -21,7 +25,8 @@ import {Router} from '@angular/router';
 export class App {
   protected title = 'MiniYT';
 
-  constructor(private dialog: MatDialog, private router: Router) {}
+  constructor(private dialog: MatDialog, private router: Router, private toastService: ToastService) {
+  }
 
   noToken() {
     return !localStorage.getItem('token');
@@ -38,9 +43,15 @@ export class App {
       this.router.navigate(['/search']);
       return;
     } else {
-      this.router.navigate(['/search'], { queryParams: { title: searchTerm } });
+      this.router.navigate(['/search'], {queryParams: {title: searchTerm}});
     }
   }
 
   protected readonly String = String;
+
+  showToast() {
+    this.toastService.show(`This is toast info`, 'info', 3000);
+    this.toastService.show(`This is toast success`, 'success', 2000);
+    this.toastService.show(`This is toast error`, 'error', 1000);
+  }
 }
