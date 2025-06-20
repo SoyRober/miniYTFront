@@ -10,11 +10,12 @@
 
   <div class="flex-5 justify-center-safe items-center-safe content-center">
     <input
+      #searchInput
       type="text"
       name="search"
       placeholder="Search video"
       class="w-80 px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-      (change)="searchVideos($event)"
+      (keydown.enter)="searchVideos(searchInput.value)"
     />
   </div>
 

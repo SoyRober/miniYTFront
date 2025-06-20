@@ -33,11 +33,13 @@ export class App {
     });
   }
 
-  searchVideos(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const value = input.value.trim();
-    if (!value) return;
-    this.router.navigate(['/search'], { queryParams: { search: value } });
+  searchVideos(searchTerm: string) {
+    if (searchTerm.length === 0) {
+      this.router.navigate(['/search']);
+      return;
+    } else {
+      this.router.navigate(['/search'], { queryParams: { title: searchTerm } });
+    }
   }
 
   protected readonly String = String;
