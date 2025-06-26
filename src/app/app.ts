@@ -1,11 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterOutlet, RouterLink, RouterLinkActive} from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {VideoUpload} from './modal/video-upload/video-upload';
 import {Router} from '@angular/router';
-import {Toast} from './toast/toast';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +15,6 @@ import {Toast} from './toast/toast';
     RouterLink,
     RouterLinkActive,
     MatDialogModule,
-    Toast,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',

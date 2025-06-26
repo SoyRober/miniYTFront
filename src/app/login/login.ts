@@ -1,5 +1,5 @@
-import { LoginService } from './login.service';
-import { Component } from '@angular/core';
+import {LoginService} from './login.service';
+import {Component} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,11 +7,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {Router} from '@angular/router';
 import {ToastService} from '../toast/toast.service';
 
 @Component({
@@ -24,7 +24,7 @@ import {ToastService} from '../toast/toast.service';
     MatButtonModule,
     MatIconModule,
   ],
-    templateUrl: './login.html',
+  templateUrl: './login.html',
   styleUrl: './login.css'
 })
 export class Login {
@@ -39,18 +39,18 @@ export class Login {
   }
 
   onSubmit() {
-    if(this.loginForm.invalid) return;
+    if (this.loginForm.invalid) return;
 
     const formData = this.loginForm.value;
 
     this.loginService.login(formData).subscribe({
       next: (response) => {
-        this.toastService.show("Login successful!", 'success', 3000);
         localStorage.setItem('token', response.message);
+        this.toastService.openSnackBarSuccess('Login successful!');
         this.router.navigate(['/search']);
       },
       error: (error) => {
-        console.log(error);
+        this.toastService.openSnackBar('Login successful!');
       }
     })
   }

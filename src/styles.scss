@@ -1,0 +1,7 @@
+@use '@angular/material' as mat;
+@use "tailwindcss";
+
+::ng-deep .mat-snack-bar-container.snackbar-success {
+  background-color: green !important;
+  color: black !important;
+}
