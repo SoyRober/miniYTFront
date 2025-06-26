@@ -1,10 +1,10 @@
-<mat-toolbar class="bg-white shadow px-4">
+<mat-toolbar class="bg-white shadow px-4 sticky">
   <div class="flex-1 text-xl font-bold">
     <a
       routerLink="/"
       routerLinkActive="active"
       class="text-gray-800 hover:text-blue-500 cursor-pointer"
-      >Home</a
+    >Home</a
     >
   </div>
 
@@ -20,19 +20,19 @@
   </div>
 
   <div class="">
-    @if(noToken()) {
-    <a mat-raised-button class="primary" routerLink="/login">Login</a>
-    <a
-      mat-raised-button
-      color="primary"
-      routerLink="/register"
-      routerLinkActive="active"
+    @if (noToken()) {
+      <a mat-raised-button class="primary" routerLink="/login">Login</a>
+      <a
+        mat-raised-button
+        color="primary"
+        routerLink="/register"
+        routerLinkActive="active"
       >Register</a
-    >
+      >
     } @else {
       <button matButton (click)="openUploadDialog()">Upload Video</button>
     }
   </div>
 </mat-toolbar>
 
-<router-outlet />
+<router-outlet/>
