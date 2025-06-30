@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './search.css'
 })
 export class Search {
-  page = 1;
+  page = 0;
   loading = false;
   videos: any[] = [];
   hasMore = true;
@@ -34,7 +34,7 @@ export class Search {
   ngOnInit() {
     this.queryParamsSub = this.route.queryParams.subscribe((params) => {
       this.searchTerms = params['search'] || '';
-      this.page = 1;
+      this.page = 0;
       this.hasMore = true;
       this.getVideos(false);
     });
@@ -45,21 +45,21 @@ export class Search {
   }
 
   getVideos(append = false) {
-    const PAGE_SIZE = 20;
     this.loading = true;
 
     this.searchService.searchVideos(this.searchTerms, this.page).subscribe({
       next: (data: any) => {
         const results = data.message || [];
-
-        this.hasMore = results.length === PAGE_SIZE;
+        console.log(data);
+        this.hasMore = results.length > 0;
         this.videos = append ? [...this.videos, ...results] : results;
         this.loading = false;
       },
       error: (err: any) => {
         this.toastService.openSnackBar(err.error.message);
         this.loading = false;
-      }
+      },
+      complete: () => this.loading = false,
     });
   }
 
@@ -73,8 +73,8 @@ export class Search {
   }
 
   onScroll() {
-    console.log("scroll event triggered");
     if (this.loading || !this.hasMore) return;
+    console.log("scroll event triggered");
     this.page++;
     this.getVideos(true);
   }

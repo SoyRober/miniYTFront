@@ -10,10 +10,11 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   searchVideos(searchParam: string, page: number) {
-    console.log(searchParam);
+
     const url = searchParam
       ? `${this.apiUrl}?search=${encodeURIComponent(searchParam)}&page=${page}`
-      : this.apiUrl;
+      : `${this.apiUrl}?page=${page}`;
+    console.log(url);
     return this.http.get<any>(url);
   }
 }
