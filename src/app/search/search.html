@@ -1,5 +1,5 @@
 <div
-  class="h-full overflow-y-auto"
+  class="h-full overflow-y-auto relative"
   infiniteScroll
   [infiniteScrollDistance]="2"
   [infiniteScrollThrottle]="300"
@@ -7,6 +7,13 @@
   [scrollWindow]="false"
 >
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+    @if (videos.length === 0 && !loading && noResultsFound) {
+      <app-no-content
+        message="No videos found"
+        icon="video_library"
+        />
+    }
+
     @for (video of videos; track video.id) {
       <mat-card class="drop-shadow-sm cursor-pointer aspect-[16/9] flex flex-col rounded-sm"
                 (click)="redirectToVideo(video.uuid)">
@@ -30,6 +37,10 @@
           <p class="text-md truncate">{{ video.description }}</p>
         </mat-card-content>
       </mat-card>
+    }
+
+    @if (loading) {
+      <app-loading />
     }
   </div>
 </div>

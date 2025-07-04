@@ -6,12 +6,18 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {ToastService} from '../toast/toast.service';
 import {InfiniteScrollDirective} from 'ngx-infinite-scroll';
 import { Subscription } from 'rxjs';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {Loading} from '../component/loading/loading';
+import {NoContent} from '../component/no-content/no-content';
 
 @Component({
   selector: 'app-search',
   imports: [
     MatCardModule,
     InfiniteScrollDirective,
+    MatProgressSpinner,
+    Loading,
+    NoContent,
   ],
   templateUrl: './search.html',
   styleUrl: './search.css'
