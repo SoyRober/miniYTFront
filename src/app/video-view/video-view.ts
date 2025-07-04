@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { VideoViewService } from './video-view.service';
+import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {VideoViewService} from './video-view.service';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIcon} from '@angular/material/icon';
 
 export interface VideoDetails {
   uuid: string;
@@ -11,7 +12,7 @@ export interface VideoDetails {
 
 @Component({
   selector: 'app-video-view',
-  imports: [MatExpansionModule],
+  imports: [MatExpansionModule, MatIcon],
   templateUrl: './video-view.html',
   styleUrl: './video-view.css'
 })
@@ -20,7 +21,8 @@ export class VideoView {
   videoDetails?: VideoDetails;
   uuid?: string | null;
 
-  constructor(private router: ActivatedRoute, private videoViewService: VideoViewService) {}
+  constructor(private router: ActivatedRoute, private videoViewService: VideoViewService) {
+  }
 
   ngOnInit() {
     this.videoStream();
