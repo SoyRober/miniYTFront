@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VideoUploadService {
-  private apiUrl = 'http://localhost:8080/user/video/upload';
+  private apiUrl = `${environment.apiUrl}/user/video/upload`;
 
   constructor(private http: HttpClient) {}
 

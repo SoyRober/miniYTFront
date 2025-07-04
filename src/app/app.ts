@@ -1,10 +1,12 @@
-import {Component, inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterOutlet, RouterLink, RouterLinkActive} from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {VideoUpload} from './modal/video-upload/video-upload';
 import {Router} from '@angular/router';
+import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,10 @@ import {Router} from '@angular/router';
     RouterLink,
     RouterLinkActive,
     MatDialogModule,
+    MatMenu,
+    MatMenuTrigger,
+    MatIcon,
+    MatMenuItem
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -42,5 +48,9 @@ export class App {
     } else {
       this.router.navigate(['/search'], {queryParams: {search: searchTerm}});
     }
+  }
+
+  viewMyVideos() {
+    console.log("Viendo los videos del usuario");
   }
 }

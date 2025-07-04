@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {environment} from '../../environments/environment';
 
 export interface RegisterData {
   username: string;
@@ -11,7 +12,7 @@ export interface RegisterData {
   providedIn: 'root',
 })
 export class RegisterService {
-  private apiUrl = 'http://localhost:8080/public/register';
+  private apiUrl = `${environment.apiUrl}/public/register`;
 
   constructor(private http: HttpClient) {}
 
