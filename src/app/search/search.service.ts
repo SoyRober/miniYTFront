@@ -1,11 +1,12 @@
 import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
-  private apiUrl = 'http://localhost:8080/public/search';
+  private apiUrl = `${environment.apiUrl}/public/search`;
 
   constructor(private http: HttpClient) { }
 
