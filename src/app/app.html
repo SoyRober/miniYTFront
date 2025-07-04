@@ -30,12 +30,20 @@
       >Register</a
       >
     } @else {
-      <mat-menu #userMenu="matMenu" panelClass="bg-red-900">
+      <mat-menu #videoMenu="matMenu" panelClass="bg-red-900">
         <button class="cursor-pointer w-full text-left ml-2" mat-menu-item (click)="viewMyVideos()">My Videos</button>
         <button class="cursor-pointer w-full text-left ml-2" mat-menu-item (click)="openUploadDialog()">Upload Video</button>
       </mat-menu>
+      <button mat-button [matMenuTriggerFor]="videoMenu">
+        Videos
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <mat-menu #userMenu="matMenu" panelClass="bg-red-900">
+        <button class="cursor-pointer w-full text-left ml-2" mat-menu-item (click)="logOut()">Log out</button>
+      </mat-menu>
       <button mat-button [matMenuTriggerFor]="userMenu">
-        Account
+        Profile
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
     }

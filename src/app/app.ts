@@ -53,4 +53,8 @@ export class App {
   viewMyVideos() {
     console.log("Viendo los videos del usuario");
   }
+
+  logOut() {
+    localStorage.removeItem('token');
+  }
 }
