@@ -18,8 +18,8 @@ export class VideoUpload {
 
   constructor(private videoService: VideoUploadService, private fb: FormBuilder) {
     this.videoForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['', [Validators.required, Validators.minLength(0)]],
+      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      description: ['', [Validators.required, Validators.minLength(0), Validators.maxLength(1000)]],
       thumbnail: [null],
       file: [null, Validators.required]
     })
